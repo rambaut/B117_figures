@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>B.1.1.7 figures</title>
+    <meta charset="utf-8" />
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.15.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.15.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.11.1"></script>
+
+    <style media="screen">
+      .vega-actions a {
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+	<div id="vis"></div>
+    <script>
+    	// Assign the specification to a local variable vlSpec.
+    	var vlSpec = {
+			$schema: 'https://vega.github.io/schema/vega-lite/v4.json',
+			data: {url: "https://rambaut.github.io/polecat/data.csv"},
+			transform: [
+				//{filter: "datum.tip_count > 10"},
+				//{filter: {field: "pillar_2", equal: "TRUE"}}
+			],
+	 		vconcat: [
+				{
+				  width: 640,
+				  height: 320,
+				  mark: {type: "bar", clip: true},
+				  encoding: {
+					x: {
+					  field: "sample_date",
+					  type: "temporal",
+					  scale: { domain: ["2020-09-01", "2020-12-14"]},
+					  title: ""
+					},
+					y: { aggregate: "count", type: "quantitative", title: ""},
+					color: {
+					  field: "B117",
+					  type: "nominal",
+					  scale: {
+						domain: ["TRUE", "FALSE"],
+						range: ["#e7ba52", "#c7c7c7"]
+					  },
+					  title: "B.1.1.7"
+					}
+				  }
+				},
+				{
+				  width: 640,
+				  height: 320,
+				  mark: {type: "bar", clip: true},
+				  encoding: {
+					x: {
+					  field: "sample_date",
+					  type: "temporal",
+					  scale: { domain: ["2020-09-01", "2020-12-14"]},
+					  title: ""
+					},
+					y: { 
+						aggregate: "count", 
+						type: "quantitative", 
+						stack: "normalize",
+						title: ""
+					},
+					color: {
+					  field: "B117",
+					  type: "nominal",
+					  scale: {
+						domain: ["TRUE", "FALSE"],
+						range: ["#e7ba52", "#c7c7c7"]
+					  },
+					  title: "B.1.1.7"
+					}
+				  }
+				}
+			]			
+		};
+
+     // Embed the visualization in the container with id `vis`
+	vegaEmbed('#vis', vlSpec);
+
+    </script>
+  </body>
+</html>

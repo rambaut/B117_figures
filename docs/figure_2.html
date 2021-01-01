@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Polecat</title>
+    <meta charset="utf-8" />
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.15.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.15.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.11.1"></script>
+
+    <style media="screen">
+      .vega-actions a {
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+	<div id="vis"></div>
+    <script>
+    	// Assign the specification to a local variable vlSpec.
+    	var vlSpec = {
+			$schema: 'https://vega.github.io/schema/vega-lite/v4.json',
+			data: {url: "https://rambaut.github.io/polecat/skygrids.csv"},
+			transform: [
+				//{filter: "datum.tip_count > 10"},
+				//{filter: {field: "pillar_2", equal: "TRUE"}}
+			],
+	 		vconcat: [
+    			{
+				  width: 640,
+				  height: 320,
+				  layer: [
+					{
+						mark: { type: "errorband", clip: true, color: "goldenrod"},
+						encoding: {
+						y: { field: "SG_lower", "type": "quantitative", "title": ""},
+						y2: { field: "SG_upper"},
+						x: { field: "datetime2", type: "temporal"}
+					  }
+					},
+					{
+					  mark: { type: "line", clip: true, color: "goldenrod"},
+					  encoding: {
+						y: {
+						  scale: { type: "log"},
+						  field: "SG_mean",
+							scale: { type: "log", domain: [0.001, 100]},
+						  type: "quantitative"
+						},
+						x: { 
+							field: "datetime2", 
+							type: "temporal",
+							scale: { domain: ["2020-09-01", "2020-12-13"]},
+							title: ""
+						}
+					  }
+					},
+					{
+						mark: { type: "errorband", clip: true, color: "darkred"},
+						encoding: {
+						y: {
+							field: "LGC_lower", 
+							type: "quantitative", 
+							title: ""},
+						y2: {field: "LGC_upper"},
+						x: {
+						  field: "datetime",
+						  type: "temporal",
+						  scale: { domain: ["2020-09-01", "2020-12-13"]}
+						}
+					  }
+					},
+					{
+					  mark: { type: "line", clip: true, color: "darkred"},
+					  encoding: {
+						y: {
+						  scale: { type: "log"},
+						  field: "LGC_mean",
+						  type: "quantitative"
+						},
+						x: { field: "datetime", type: "temporal"}
+					  }
+					}
+				  ]
+				},
+				    			{
+				  width: 640,
+				  height: 320,
+				  layer: [
+					{
+						mark: { type: "errorband", clip: true, color: "goldenrod"},
+						encoding: {
+						y: { field: "SG_lower", "type": "quantitative", "title": ""},
+						y2: { field: "SG_upper"},
+						x: { field: "datetime2", type: "temporal"}
+					  }
+					},
+					{
+					  mark: { type: "line", clip: true, color: "goldenrod"},
+					  encoding: {
+						y: {
+						  scale: { type: "log"},
+						  field: "SG_mean",
+							scale: { type: "log", domain: [0.001, 100]},
+						  type: "quantitative"
+						},
+						x: { 
+						field: "datetime2", 
+						type: "temporal",
+						title: "",
+						scale: { domain: ["2020-09-01", "2020-12-13"]}
+						}
+					  }
+					},
+					{
+						mark: { type: "errorband", clip: true, color: "darkred"},
+						encoding: {
+						y: {
+							field: "EGC_lower", 
+							type: "quantitative", 
+							title: ""},
+						y2: {field: "EGC_upper"},
+						x: {
+						  field: "datetime",
+						  type: "temporal",
+						  scale: { domain: ["2020-09-01", "2020-12-13"]}
+						}
+					  }
+					},
+					{
+					  mark: { type: "line", clip: true, color: "darkred"},
+					  encoding: {
+						y: {
+						  scale: { type: "log"},
+						  field: "EGC_mean",
+						  type: "quantitative"
+						},
+						x: { field: "datetime", type: "temporal"}
+					  }
+					}
+				  ]
+				}
+			]			
+		};
+
+     // Embed the visualization in the container with id `vis`
+	vegaEmbed('#vis', vlSpec);
+
+    </script>
+  </body>
+</html>
