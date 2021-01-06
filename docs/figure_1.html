@@ -37,12 +37,15 @@
 					  scale: { domain: ["2020-09-01", "2020-12-14"]},
 					  title: ""
 					},
-					y: { aggregate: "count", type: "quantitative", title: ""},
+					y: { aggregate: "count", type: "quantitative", 					  
+					   scale: {
+						type: "symlog"
+					  },
+					  title: ""},
 					color: {
 					  field: "B117",
 					  type: "nominal",
 					  scale: {
-						type: "symlog",
 						domain: ["TRUE", "FALSE"],
 						range: ["#e7ba52", "#c7c7c7"]
 					  },
