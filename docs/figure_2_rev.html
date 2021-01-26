@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>B.1.1.7 figures</title>
+    <meta charset="utf-8" />
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.15.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.15.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.11.1"></script>
+
+    <style media="screen">
+      .vega-actions a {
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+	<div id="vis"></div>
+    <script>
+    	// Assign the specification to a local variable vlSpec.
+    	var vlSpec = {
+			$schema: 'https://vega.github.io/schema/vega-lite/v4.json',
+			data: {url: "https://rambaut.github.io/B117_figures/skygrids_rev.csv"},
+			transform: [
+				//{filter: "datum.tip_count > 10"},
+				//{filter: {field: "pillar_2", equal: "TRUE"}}
+			],
+	 		vconcat: [
+    			{
+					width: 640,
+					height: 640,
+					view: { stroke: "" },
+					layer: [
+						{
+							mark: { type: "errorband", clip: true, color: "goldenrod"},
+							encoding: {
+								y: { field: "lower_B1177", type: "quantitative", title: "" },
+								y2: { field: "upper_B1177", type: "quantitative"},
+								x: { field: "datetime", type: "temporal"}
+							}
+						},
+						{
+						  mark: { type: "line", clip: true, color: "goldenrod"},
+						  encoding: {
+							y: { field: "mean_B1177", type: "quantitative"},
+							x: { field: "datetime", type: "temporal"}
+						  }
+						},
+						{
+							mark: { type: "errorband", clip: true, color: "steelblue"},
+							encoding: {
+								y: { field: "lower_other", type: "quantitative", title: "" },
+								y2: { field: "upper_other", type: "quantitative"},
+								x: { field: "datetime", type: "temporal"}
+							}
+						},
+						{
+						  mark: { type: "line", clip: true, color: "steelblue"},
+						  encoding: {
+							y: { field: "mean_other", type: "quantitative"},
+							x: { field: "datetime", type: "temporal"}
+						  }
+						},
+						{
+							mark: { type: "errorband", clip: true, color: "darkred"},
+							encoding: {
+								y: { field: "lower_B117", type: "quantitative", title: "" },
+								y2: { field: "upper_B117", type: "quantitative" },
+								x: { field: "datetime", type: "temporal"}
+							}
+						},
+						{
+							mark: { type: "line", clip: true, color: "darkred"},
+							encoding: {
+								y: {
+									field: "mean_B117",
+									type: "quantitative",
+									scale: { type: "log", domain: [0.001, 10000]},
+									axis: { offset: 10, grid: false },
+									title: ""
+								},
+								x: { 
+									field: "datetime", 
+									type: "temporal",
+									scale: { domain: ["2020-08-31", "2021-01-03"]},
+									axis: { offset: 10, grid: false },
+									title: ""
+								},
+							}
+						}
+					]
+				}
+			]			
+		};
+
+     // Embed the visualization in the container with id `vis`
+	vegaEmbed('#vis', vlSpec);
+
+    </script>
+  </body>
+</html>

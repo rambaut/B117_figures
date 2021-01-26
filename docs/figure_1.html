@@ -23,8 +23,10 @@
 			data: {url: "https://rambaut.github.io/B117_figures/sequence_data.csv"},
 			transform: [
 				//{filter: "datum.tip_count > 10"},
-				{filter: {field: "pillar_2", equal: "TRUE"}},
-				{filter: {field: "UK", equal: "TRUE"}}
+				{filter: {field: "pillar_2", equal: "TRUE}}
+//				,{filter: {field: "country", equal: "UK"}}
+//				,{filter: {field: "epi_week", gt: "53"}}
+//				{filter: {field: "adm1", equal: "Wales"}}				
 			],
 	 		vconcat: [
 				{
@@ -33,24 +35,23 @@
 				  mark: {type: "bar", clip: true},
 				  encoding: {
 					x: {
-					  field: "sample_date",
-					  type: "temporal",
-					  scale: { domain: ["2020-09-01", "2021-01-14"]},
+					  field: "NUTS1",
+					  type: "nominal",
 					  title: ""
 					},
 					y: { aggregate: "count", type: "quantitative", 					  
 					   scale: {
-						type: "symlog"
+						//type: "symlog"
 					  },
 					  title: ""},
 					color: {
-					  field: "B117",
+					  field: "lineage",
 					  type: "nominal",
 					  scale: {
-						domain: ["TRUE", "FALSE"],
-						range: ["#e7ba52", "#c7c7c7"]
+						domain: ["B.1.1.7", "B.1.177", "other"],
+						range: ["#842A29", "#4C8493", "#798E87"]
 					  },
-					  title: "B.1.1.7"
+					  title: "lineage"
 					}
 				  }
 				},
@@ -62,7 +63,34 @@
 					x: {
 					  field: "sample_date",
 					  type: "temporal",
-					  scale: { domain: ["2020-09-01", "2021-01-14"]},
+					  scale: { domain: ["2020-09-01", "2021-01-20"]},
+					  title: ""
+					},
+					y: { aggregate: "count", type: "quantitative", 					  
+					   scale: {
+						//type: "symlog"
+					  },
+					  title: ""},
+					color: {
+					  field: "lineage",
+					  type: "nominal",
+					  scale: {
+						domain: ["B.1.1.7", "B.1.177", "other"],
+						range: ["#842A29", "#4C8493", "#798E87"]
+					  },
+					  title: "lineage"
+					}
+				  }
+				},
+				{
+				  width: 640,
+				  height: 320,
+				  mark: {type: "bar", clip: true},
+				  encoding: {
+					x: {
+					  field: "sample_date",
+					  type: "temporal",
+					  scale: { domain: ["2020-09-01", "2021-01-20"]},
 					  title: ""
 					},
 					y: { 
@@ -72,13 +100,13 @@
 						title: ""
 					},
 					color: {
-					  field: "B117",
+					  field: "lineage",
 					  type: "nominal",
 					  scale: {
-						domain: ["TRUE", "FALSE"],
-						range: ["#e7ba52", "#c7c7c7"]
+						domain: ["B.1.1.7", "B.1.177", "other"],
+						range: ["#842A29", "#4C8493", "#798E87"]
 					  },
-					  title: "B.1.1.7"
+					  title: "lineage"
 					}
 				  }
 				}
