@@ -29,6 +29,64 @@
 			],
 	 		vconcat: [
 				{
+					transform: [
+						{filter: {field: "epi_week", gt: "52"}}
+					],
+				  width: 640,
+				  height: 160,
+				  mark: {type: "bar", clip: true},
+				  encoding: {
+					x: {
+					  field: "NUTS1",
+					  type: "nominal",
+					  title: ""
+					},
+					y: { aggregate: "count", type: "quantitative", 					  
+					   scale: {
+						//type: "symlog"
+					  },
+					  title: ""},
+					color: {
+					  field: "lineage",
+					  type: "nominal",
+					  scale: {
+						domain: ["B.1.1.7", "B.1.177", "other"],
+						range: ["#842A29", "#4C8493", "#798E87"]
+					  },
+					  title: "lineage"
+					}
+				  }
+				},
+				{
+					transform: [
+						{filter: {field: "epi_week", gt: "53"}}
+					],
+				  width: 640,
+				  height: 160,
+				  mark: {type: "bar", clip: true},
+				  encoding: {
+					x: {
+					  field: "NUTS1",
+					  type: "nominal",
+					  title: ""
+					},
+					y: { aggregate: "count", type: "quantitative", 					  
+					   scale: {
+						//type: "symlog"
+					  },
+					  title: ""},
+					color: {
+					  field: "lineage",
+					  type: "nominal",
+					  scale: {
+						domain: ["B.1.1.7", "B.1.177", "other"],
+						range: ["#842A29", "#4C8493", "#798E87"]
+					  },
+					  title: "lineage"
+					}
+				  }
+				},
+				{
 				  width: 640,
 				  height: 320,
 				  mark: {type: "bar", clip: true},
