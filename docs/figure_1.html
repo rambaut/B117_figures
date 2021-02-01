@@ -22,8 +22,11 @@
 			$schema: 'https://vega.github.io/schema/vega-lite/v4.json',
 			data: {url: "https://rambaut.github.io/B117_figures/sequence_data.csv"},
 			transform: [
-				//{filter: "datum.tip_count > 10"},
-				{filter: {field: "pillar_2", equal: "TRUE}}
+				{
+					calculate: "if(datum.lineage === 'other', 2, if(datum.lineage === 'B.1.177', 1, 0))",
+					as: "order"
+				},
+  				{filter: {field: "pillar_2", equal: "TRUE"}}
 //				,{filter: {field: "country", equal: "UK"}}
 //				,{filter: {field: "epi_week", gt: "53"}}
 //				{filter: {field: "adm1", equal: "Wales"}}				
@@ -35,8 +38,9 @@
 				  mark: {type: "bar", clip: true},
 				  encoding: {
 					x: {
-					  field: "NUTS1",
-					  type: "nominal",
+					  field: "sample_date",
+					  type: "temporal",
+					  scale: { domain: ["2020-09-01", "2021-01-18"]},
 					  title: ""
 					},
 					y: { aggregate: "count", type: "quantitative", 					  
@@ -52,34 +56,8 @@
 						range: ["#842A29", "#4C8493", "#798E87"]
 					  },
 					  title: "lineage"
-					}
-				  }
-				},
-				{
-				  width: 640,
-				  height: 320,
-				  mark: {type: "bar", clip: true},
-				  encoding: {
-					x: {
-					  field: "sample_date",
-					  type: "temporal",
-					  scale: { domain: ["2020-09-01", "2021-01-20"]},
-					  title: ""
 					},
-					y: { aggregate: "count", type: "quantitative", 					  
-					   scale: {
-						//type: "symlog"
-					  },
-					  title: ""},
-					color: {
-					  field: "lineage",
-					  type: "nominal",
-					  scale: {
-						domain: ["B.1.1.7", "B.1.177", "other"],
-						range: ["#842A29", "#4C8493", "#798E87"]
-					  },
-					  title: "lineage"
-					}
+   					order: { field: "order"}
 				  }
 				},
 				{
@@ -90,7 +68,7 @@
 					x: {
 					  field: "sample_date",
 					  type: "temporal",
-					  scale: { domain: ["2020-09-01", "2021-01-20"]},
+					  scale: { domain: ["2020-09-01", "2021-01-18"]},
 					  title: ""
 					},
 					y: { 
@@ -107,7 +85,8 @@
 						range: ["#842A29", "#4C8493", "#798E87"]
 					  },
 					  title: "lineage"
-					}
+					},
+   					order: { field: "order"}
 				  }
 				}
 			]			
