@@ -22,108 +22,35 @@
 			$schema: 'https://vega.github.io/schema/vega-lite/v4.json',
 			data: {url: "https://rambaut.github.io/B117_figures/sequence_data.csv"},
 			transform: [
-				{filter: {field: "pillar_2", equal: "TRUE"}}
-//				,{filter: {field: "country", equal: "UK"}}
+				{
+					calculate: "if(datum.lineage === 'other', 2, if(datum.lineage === 'B.1.177', 1, 0))",
+					as: "order"
+				},
+  				{filter: {field: "pillar_2", equal: "TRUE"}}
+//				,{filter: {field: "NUTS", equal: "North_West"}}
 //				,{filter: {field: "epi_week", gt: "53"}}
 //				{filter: {field: "adm1", equal: "Wales"}}				
 			],
 	 		vconcat: [
 				{
-					transform: [
-						{filter: {field: "epi_week", gt: "54"}}
-					],
-				  width: 1200,
-				  height: 160,
-				  mark: {type: "bar", clip: true},
-				  encoding: {
-					x: {
-					  field: "location",
-					  type: "nominal",
-					  title: ""
-					},
-					y: { aggregate: "count", type: "quantitative", 					  
-					   scale: {
-						//type: "symlog"
-					  },
-					  title: ""},
-					color: {
-					  field: "lineage",
-					  type: "nominal",
-					  scale: {
-						domain: ["B.1.1.7", "B.1.177", "other"],
-						range: ["#842A29", "#4C8493", "#798E87"]
-					  },
-					  title: "lineage"
-					},
-					title: "Week 54"
-				  }
-				},
-				{
-					transform: [
-						{filter: {field: "epi_week", gt: "55"}}
-					],
-				  width: 1200,
-				  height: 160,
-				  mark: {type: "bar", clip: true},
-				  encoding: {
-					x: {
-					  field: "location",
-					  type: "nominal",
-					  title: ""
-					},
-					y: { aggregate: "count", type: "quantitative", 					  
-					   scale: {
-						//type: "symlog"
-					  },
-					  title: ""},
-					color: {
-					  field: "lineage",
-					  type: "nominal",
-					  scale: {
-						domain: ["B.1.1.7", "B.1.177", "other"],
-						range: ["#842A29", "#4C8493", "#798E87"]
-					  },
-					  title: "lineage"
-					}
-				  },
-					title: "Week 55"
-				},
-				{
+				transform: [
+					{filter: {field: "location", equal: "South Yorkshire"}}
+				],
+					title: "South Yorkshire",
 				  width: 640,
 				  height: 320,
 				  mark: {type: "bar", clip: true},
 				  encoding: {
+//					x: {
+//					  field: "epi_week",
+//					  type: "quantitative",
+//					  scale: { domain: ["32", "56"]},
+//					  title: ""
+//					},
 					x: {
 					  field: "sample_date",
 					  type: "temporal",
-					  scale: { domain: ["2020-09-01", "2021-01-13"]},
-					  title: ""
-					},
-					y: { aggregate: "count", type: "quantitative", 					  
-					   scale: {
-						//type: "symlog"
-					  },
-					  title: ""},
-					color: {
-					  field: "lineage",
-					  type: "nominal",
-					  scale: {
-						domain: ["B.1.1.7", "B.1.177", "other"],
-						range: ["#842A29", "#4C8493", "#798E87"]
-					  },
-					  title: "lineage"
-					}
-				  }
-				},
-				{
-				  width: 640,
-				  height: 320,
-				  mark: {type: "bar", clip: true},
-				  encoding: {
-					x: {
-					  field: "sample_date",
-					  type: "temporal",
-					  scale: { domain: ["2020-09-01", "2021-01-13"]},
+					  scale: { domain: ["2020-09-01", "2021-01-18"]},
 					  title: ""
 					},
 					y: { 
@@ -140,7 +67,86 @@
 						range: ["#842A29", "#4C8493", "#798E87"]
 					  },
 					  title: "lineage"
-					}
+					},
+   					order: { field: "order"}
+				  }
+				},
+				{
+				transform: [
+					{filter: {field: "location", equal: "West Yorkshire"}}
+				],
+					title: "West Yorkshire",
+				  width: 640,
+				  height: 320,
+				  mark: {type: "bar", clip: true},
+				  encoding: {
+//					x: {
+//					  field: "epi_week",
+//					  type: "quantitative",
+//					  scale: { domain: ["32", "56"]},
+//					  title: ""
+//					},
+					x: {
+					  field: "sample_date",
+					  type: "temporal",
+					  scale: { domain: ["2020-09-01", "2021-01-18"]},
+					  title: ""
+					},
+					y: { 
+						aggregate: "count", 
+						type: "quantitative", 
+						stack: "normalize",
+						title: ""
+					},
+					color: {
+					  field: "lineage",
+					  type: "nominal",
+					  scale: {
+						domain: ["B.1.1.7", "B.1.177", "other"],
+						range: ["#842A29", "#4C8493", "#798E87"]
+					  },
+					  title: "lineage"
+					},
+   					order: { field: "order"}
+				  }
+				},
+				{
+				transform: [
+					{filter: {field: "NUTS1", oneOf: ["North_West","South_East"]}}
+				],
+					title: "North West & South East",
+				  width: 640,
+				  height: 320,
+				  mark: {type: "bar", clip: true},
+				  encoding: {
+//					x: {
+//					  field: "epi_week",
+//					  type: "quantitative",
+//					  scale: { domain: ["32", "56"]},
+//					  title: ""
+//					},
+					x: {
+					  field: "sample_date",
+					  type: "temporal",
+					  scale: { domain: ["2020-09-01", "2021-01-18"]},
+					  title: ""
+					},
+					y: { 
+						aggregate: "count", 
+						type: "quantitative", 
+						stack: "normalize",
+						title: ""
+					},
+					color: {
+					  field: "lineage",
+					  type: "nominal",
+					  scale: {
+						domain: ["B.1.1.7", "B.1.177", "other"],
+						range: ["#842A29", "#4C8493", "#798E87"]
+					  },
+					  title: "lineage"
+					},
+   					order: { field: "order"}
 				  }
 				}
 			]			

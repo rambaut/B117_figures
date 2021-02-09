@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>B.1.1.7 figures</title>
+    <meta charset="utf-8" />
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.15.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.15.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.11.1"></script>
+
+    <style media="screen">
+      .vega-actions a {
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+	<div id="vis"></div>
+    <script>
+    	// Assign the specification to a local variable vlSpec.
+    	var vlSpec = {
+			$schema: 'https://vega.github.io/schema/vega-lite/v4.json',
+			hconcat: [
+			{
+				width: 500,
+				height: 800,
+				layer: [
+					{
+						data: {
+							url: "https://rambaut.github.io/B117_figures/uk-counties.json",
+							format: {
+								type: "topojson",
+								feature: "GBR_adm2"
+							}
+						},
+//						projection: {
+//							type: "equirectangular",
+//							scale: 1.0
+//							,translate: [-1.715,54.152]
+//						},
+						mark: {
+							type: "geoshape",
+							fill: "lightgray",
+							stroke: "white"
+						}
+					},
+					{
+						data: {
+							url: "https://rambaut.github.io/B117_figures/sequence_data.csv"
+						},
+						transform: [
+//							{filter: {field: "pillar_2", equal: "TRUE"}}
+							{filter: {field: "is_surveillance", oneOf: ["Y", "N"]}}
+							,{filter: {field: "latitude", gt: 1.0}}
+							,{filter: {field: "lineage", oneOf: ["B.1.351"]}}
+			//				,{filter: {field: "NUTS", equal: "North_West"}}
+							,{filter: {field: "epi_week", gt: "52"}}
+			//				{filter: {field: "adm1", equal: "Wales"}}				
+						],					
+						mark: "circle",
+						encoding: {
+							longitude: {
+								field: "longitude",
+								type: "quantitative"
+							},
+							latitude: {
+								field: "latitude",
+								type: "quantitative"
+							},
+							color: {
+								field: "is_surveillance",
+								type: "nominal",
+								scale: {
+									domain: ["Y", "N", "B.1.351", "other"],
+									range: ["red", "blue", "red", "green"]
+								}
+							},
+							opacity: { value: 0.2},
+							size: {value: 20},
+							title: "Week 52"
+						}
+					}
+				]
+			},
+{
+				width: 500,
+				height: 800,
+				layer: [
+					{
+						data: {
+							url: "https://rambaut.github.io/B117_figures/uk-counties.json",
+							format: {
+								type: "topojson",
+								feature: "GBR_adm2"
+							}
+						},
+///						projection: {
+///							type: "mercator"
+///						},
+						mark: {
+							type: "geoshape",
+							fill: "lightgray",
+							stroke: "white"
+						}
+					},
+					{
+						data: {
+							url: "https://rambaut.github.io/B117_figures/sequence_data.csv"
+						},
+						transform: [
+//							{filter: {field: "pillar_2", equal: "TRUE"}}
+							{filter: {field: "is_surveillance", oneOf: ["Y", "N"]}}
+			//				,{filter: {field: "NUTS", equal: "North_West"}}
+							,{filter: {field: "lineage", oneOf: ["B.1.351"]}}
+							,{filter: {field: "epi_week", gt: "53"}}
+			//				{filter: {field: "adm1", equal: "Wales"}}				
+						],					
+						mark: "circle",
+						encoding: {
+							longitude: {
+								field: "longitude",
+								type: "quantitative"
+							},
+							latitude: {
+								field: "latitude",
+								type: "quantitative"
+							},
+							color: {
+								field: "is_surveillance",
+								type: "nominal",
+								scale: {
+									domain: ["Y", "N", "B.1.351", "other"],
+									range: ["red", "blue", "red", "green"]
+								}
+							},
+							opacity: { value: 0.2},
+							size: {value: 20},
+							title: "Week 53"
+						}
+					}
+				]
+			},
+{
+				width: 500,
+				height: 800,
+				layer: [
+					{
+						data: {
+							url: "https://rambaut.github.io/B117_figures/uk-counties.json",
+							format: {
+								type: "topojson",
+								feature: "GBR_adm2"
+							}
+						},
+///						projection: {
+///							type: "mercator"
+///						},
+						mark: {
+							type: "geoshape",
+							fill: "lightgray",
+							stroke: "white"
+						}
+					},
+					{
+						data: {
+							url: "https://rambaut.github.io/B117_figures/sequence_data.csv"
+						},
+						transform: [
+//							{filter: {field: "pillar_2", equal: "TRUE"}}
+							{filter: {field: "is_surveillance", oneOf: ["Y", "N"]}}
+			//				,{filter: {field: "NUTS", equal: "North_West"}}
+							,{filter: {field: "lineage", oneOf: ["B.1.351"]}}
+							,{filter: {field: "epi_week", gt: "54"}}
+			//				{filter: {field: "adm1", equal: "Wales"}}				
+						],					
+						mark: "circle",
+						encoding: {
+							longitude: {
+								field: "longitude",
+								type: "quantitative"
+							},
+							latitude: {
+								field: "latitude",
+								type: "quantitative"
+							},
+							color: {
+								field: "is_surveillance",
+								type: "nominal",
+//								scale: {
+//									domain: ["B.1.1.7", "B.1.177", "B.1.351", "other"],
+//									range: ["red", "blue", "red", "green"]
+//								}
+								scale: {
+									domain: ["Y", "N", "B.1.351", "other"],
+									range: ["red", "blue", "red", "green"]
+								}
+							},
+							opacity: { value: 0.2},
+							size: {value: 20},
+							title: "Week 54"
+						}
+					}
+				]
+			}
+			]					
+		};
+
+     // Embed the visualization in the container with id `vis`
+	vegaEmbed('#vis', vlSpec);
+
+    </script>
+  </body>
+</html>
