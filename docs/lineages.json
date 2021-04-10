@@ -77,49 +77,7 @@
         }
       ],
       "colname": "level2"
-    },
-    {
-      "name": "boss3",
-      "children": [
-        {
-          "name": "mister_i",
-          "group": "B",
-          "value": 10,
-          "colname": "level3"
-        },
-        {
-          "name": "mister_j",
-          "group": "A",
-          "value": 13,
-          "colname": "level3"
-        },
-        {
-          "name": "mister_k",
-          "group": "A",
-          "value": 13,
-          "colname": "level3"
-        },
-        {
-          "name": "mister_l",
-          "group": "D",
-          "value": 25,
-          "colname": "level3"
-        },
-        {
-          "name": "mister_m",
-          "group": "D",
-          "value": 16,
-          "colname": "level3"
-        },
-        {
-          "name": "mister_n",
-          "group": "D",
-          "value": 28,
-          "colname": "level3"
-        }
-      ],
-      "colname": "level2"
     }
   ],
-  "name": "CEO"
+  "name": "PANGO lineages"
 }
