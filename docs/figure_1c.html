@@ -34,9 +34,9 @@
 	 		vconcat: [
 				{
 				transform: [
-					{filter: {field: "location", equal: "South Yorkshire"}}
+					{filter: {field: "NUTS1", equal: "Scotland"}}
 				],
-					title: "South Yorkshire",
+					title: "Scotland",
 				  width: 640,
 				  height: 320,
 				  mark: {type: "bar", clip: true},
@@ -50,7 +50,7 @@
 					x: {
 					  field: "sample_date",
 					  type: "temporal",
-					  scale: { domain: ["2020-09-01", "2021-01-18"]},
+					  scale: { domain: ["2020-09-01", "2021-02-14"]},
 					  title: ""
 					},
 					y: { 

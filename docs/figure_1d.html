@@ -23,12 +23,12 @@
 			data: {url: "https://rambaut.github.io/B117_figures/sequence_data.csv"},
 			transform: [
 				{
-					calculate: "if(datum.lineage === 'other', 2, if(datum.lineage === 'B.1.177', 1, 0))",
+					calculate: "if(datum.e484k === 'E', 1, 0)",
 					as: "order"
-				},
-  				{filter: {field: "pillar_2", equal: "TRUE"}}
-//				{filter: {field: "is_surveillance", oneOf: ["Y", "N"]}}
-//				{filter: {field: "lineage", oneOf: ["B.1.351"]}}				
+				}
+//  				,{filter: {field: "pillar_2", equal: "TRUE"}}
+				,{filter: {field: "e484k", oneOf: ["E", "K"]}}
+				,{filter: {field: "lineage", oneOf: ["B.1.1.7"]}}				
 //				,{filter: {field: "country", oneOf: ["South_Africa", "UK"]}}
 //				,{filter: {field: "epi_week", gt: "53"}}
 //				{filter: {field: "adm1", equal: "Wales"}}				
@@ -47,18 +47,18 @@
 					},
 					y: { aggregate: "count", type: "quantitative", 					  
 					   scale: {
-						//type: "symlog"
+						type: "symlog"
 						//domain: [0,10]
 					  },
 					  title: ""},
 					color: {
-					  field: "lineage",
+					  field: "e484k",
 					  type: "nominal",
 					  scale: {
-						domain: ["B.1.1.7", "B.1.177", "other"],
+						domain: ["E", "K"],
 						range: ["#842A29", "#4C8493", "#798E87", "#DDDDDD"]
 					  },
-					  title: "country"
+					  title: "spike E484K"
 					},
    					order: { field: "order"}
 				  }
@@ -84,16 +84,20 @@
 						aggregate: "count", 
 						type: "quantitative", 
 						stack: "normalize",
+					   	scale: {
+							type: "symlog"
+						//domain: [0,10]
+					  	},
 						title: ""
 					},
 					color: {
-					  field: "lineage",
+					  field: "e484k",
 					  type: "nominal",
 					  scale: {
-						domain: ["B.1.1.7", "B.1.177", "other"],
+						domain: ["E", "K"],
 						range: ["#842A29", "#4C8493", "#798E87", "#DDDDDD"]
 					  },
-					  title: "lineage"
+					  title: "spike E484K"
 					},
    					order: { field: "order"}
 				  }
