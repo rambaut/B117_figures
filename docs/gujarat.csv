@@ -1,4 +1,4 @@
-sequence_name,accession,sample_date,region,country,state,district,lab,Lineage
+sequence_name,accession,sample_date,region,country,state,district,lab,lineage
 India/GJ-GBRC466a/2021,EPI_ISL_1544115,2021-03-01,Asia,India,Gujarat,Ahmedabad,GBRC,B.1.1.7
 India/GJ-GBRC466b/2021,EPI_ISL_1544116,2021-03-01,Asia,India,Gujarat,Ahmedabad,GBRC,B.1.1.7
 India/GJ-GBRC467/2021,EPI_ISL_1544117,2021-03-02,Asia,India,Gujarat,Ahmedabad,GBRC,B.1.1.7
